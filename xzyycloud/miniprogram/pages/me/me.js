@@ -106,15 +106,6 @@ Page({
       }
     })
   },
-  // tapTestCloudFunction(){
-  //   console.log('云函数');
-  //   wx.cloud.callFunction({
-  //     name: 'add', //目标云函数名称 add
-  //     data: {
-  //       a: 100, b: 50  // 传递参数
-  //     }
-  //   }).then(res => console.log(res))
-  // },
   // 触发双击事件
   doubletapEvent(){
     console.log('么么哒');

@@ -11,8 +11,7 @@
   <text bindtap="tapLogin">{{nickName}}</text>
 </view>
 
-<van-cell bindtap="tapTestCloudFunction" 
-          title="我的订单" 
+<van-cell title="我的订单" 
           is-link size="large" 
           icon="shopping-cart-o"></van-cell>
 <van-cell title="我的优惠券" is-link size="large" icon="coupon-o"></van-cell>
