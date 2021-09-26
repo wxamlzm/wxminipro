@@ -1,0 +1,13 @@
+<!--pages/add/add.wxml-->
+<text>pages/add/add.wxml</text>
+<button type="primary" bindtap="tapAdd">点我新增设数据</button>
+
+<button type="primary" bindtap="tapAddComment">点我发表评论</button>
+
+<button bindtap="selectOne" type="primary">
+查询一条数据
+</button>
+
+<button bindtap="selectMul" type="primary">
+    查询多条数据
+</button>

@@ -1,9 +1,10 @@
 {
   "pages":[
+    "pages/me/me",
     "pages/index/index",
+    "pages/citylist/citylist",
     "pages/movie/movie",
     "pages/theatre/theatre",
-    "pages/me/me",
     "pages/logs/logs"
   ],
   "window":{

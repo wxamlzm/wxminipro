@@ -2,17 +2,21 @@
 // 获取应用实例
 const app = getApp()
 // 引入qqmap模块
-const QQMapWX = require("../../libs/qqmap-wx-jssdk.min");
-var qqmapskd = new QQMapWX({
-	key: 'AONBZ-GGVER-T37WR-WFDOG-SWBG5-MQF3E',
+// const QQMapWX = require("../../libs/qqmap-wx-jssdk.min");
+// var qqmapskd = new QQMapWX({
+// 	key: 'AONBZ-GGVER-T37WR-WFDOG-SWBG5-MQF3E',
 
-});
+// });
 
 Page({
 	data: {
 		cid: 1, // 保存当前导航选中项的类别id
 		movies: [], // 保存当前正在显示的电影列表
 		cityname: '未选择'
+	},
+	// 切换城市时触发
+	changeCity(){
+
 	},
 	// 切换选项卡的时候触发
 	tapnav(event) {
@@ -73,19 +77,24 @@ Page({
 		// 发送http请求，加载1类别下的首页电影数据
 		this.loadmovies(1,0).then(movieList => {
 			this.setData({movies:movieList});
-			console.log(movieList);
-			}
-		);
+		});
+		let qqmapsdk = getApp().globalData.qqmapsdk;
 		// 加载当前位置，通过qqmapsdk获取城市名称
-		qqmapskd.reverseGeocoder({
+		qqmapsdk.reverseGeocoder({
 			success: res => {
 				// 接收到回调参数，改变界面ui
-				this.setData({cityname: res.result.address_component.city});
+				let cityname = res.result.address_component.city;
+				this.setData({cityname});
+				getApp().globalData.cityname = cityname;
 			}
 		});
 
 	},
-
+	onShow(){
+		// 从globaldata中获取cityname，更新左上角即可
+		let cityname = getApp().globalData.cityname;
+		this.setData({cityname});
+	},
 	// 当页面触底时执行该方法
 	onReachBottom() {
 		console.log('reach');

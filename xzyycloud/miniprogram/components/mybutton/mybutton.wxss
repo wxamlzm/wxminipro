@@ -1,0 +1,16 @@
+/* components/mybutton/mybutton.wxss */
+.btn {
+    padding: 10rpx 30rpx;
+    color: #FFF;
+    background-color: #F00;
+    border: 1px solid #000;
+    display: inline-block;
+}
+.rect {
+    border-radius: 6rpx;
+}
+
+.round {
+    border-radius: 100rpx;
+    /* 胶囊按钮，radius值大了没关系 */
+}

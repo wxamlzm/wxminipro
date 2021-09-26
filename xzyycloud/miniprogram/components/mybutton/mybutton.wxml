@@ -1,0 +1,5 @@
+<!--components/mybutton/mybutton.wxml-->
+<view class="btn {{type}}"
+      style="background-color: {{color}};">
+    {{value}}
+</view>

@@ -1,0 +1,7 @@
+<!--pages/me/me.wxml-->
+<my-button class="mybtn"></my-button>
+<my-button class="mybtn" color="red"></my-button>
+<my-button class="mybtn" color="#54aa21"></my-button>
+<my-button class="mybtn" value="快速登录"></my-button>
+<my-button class="mybtn" value="快速登录" type="round"></my-button>
+<!-- 功能有哪些，哪些需要用户传过来，就要开放这些属性，让用户来传参 -->

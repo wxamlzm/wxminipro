@@ -1,0 +1,5 @@
+/* pages/me/me.wxss */
+.mybtn{
+    margin: 10px;
+    display: block;
+}
