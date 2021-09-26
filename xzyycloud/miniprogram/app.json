@@ -32,7 +32,6 @@
       "selectedIconPath": "/images/me_enable.png"
     }]
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json",
   "permission": {
     "scope.userLocation": {

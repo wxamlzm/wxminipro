@@ -1,5 +1,7 @@
 <!--components/mybutton/mybutton.wxml-->
 <view class="btn {{type}}"
-      style="background-color: {{color}};">
+      style="background-color: {{color}};"
+      bindtap="tapEvent"> 
+      <!-- 根据基础事件的运行过程,来捕获自定义事件的触发时机 -->
     {{value}}
 </view>
