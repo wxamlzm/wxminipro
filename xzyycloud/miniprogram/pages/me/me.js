@@ -25,49 +25,38 @@ Page({
       desc: '您的信息将用于完善会员系统',
       success: res => {
         console.log(res);
-        // this.setData({
-        //   userInfo:{
-        //       nickName:res.userInfo.nickName,
-        //       avatar: res.userInfo.avatarUrl,
-        //       isLogin: true // 已经登录
-        //   }
-        // });
-        // 判断该用户是否是第一次登录
-        // 若第一次登录则执行户厕，新增到云数据库
-        // 调用云函数，获取用户的openid
-        wx.cloud.callFunction({name: 'getOpenid'})
-                .then(getOpenidRes => {
-                  console.log('openid',getOpenidRes);
-                  let openid = getOpenidRes.result.openid;
-                  // 将openid存入globaldata
-                  getApp().globalData.openid = openid;
 
-                  // 判断当前openid是否已经注册
-                  let db = wx.cloud.database();
-                  db.collection('users')
-                    .where({"_openid": openid})
-                    .get()
-                    .then(queryRes => {
-                      console.log('queryRes',queryRes)
-                      if(queryRes.data.length > 0){
-                        // 若找到了数据，更新最新的头像与昵称
-                        console.log('找到了');
-                        console.log(queryRes.data[0].nickName);
-                        this.setData({
-                            nickName:queryRes.data[0].nickName,
-                            avatar: queryRes.data[0].avatarUrl,
-                            isLogin: true // 已经登录
-                        });
-                        console.log(this.data.nickName);
-                      }else{
-                        console.log('没找到')
-                        // 若第一次登录则执行注册，新增到云数据库
-                        this.regist(res.userInfo);
-                      }
-                    })
-                })
+        wx.cloud
+          // 调用云函数，获取用户的openid
+          .callFunction({name: 'getOpenid'})
+          .then(getOpenidRes => {
+            console.log(getOpenidRes);
+            let openid = getOpenidRes.result.openid;
+            // 将openid存入globaldata，以作为其他功能使用
+            getApp().globalData.openid = openid;
 
-        this.regist(res.userInfo);
+            // 判断当前openid是否已经注册
+            // 若第一次登录则执行云函数，新增到云数据库
+            let db = wx.cloud.database();
+
+            db.collection('users')
+              .where({"_openid": openid})
+              .get()
+              .then(queryRes => {
+                console.log('queryRes',queryRes)
+                if(queryRes.data.length > 0){
+                  // 若找到了数据，更新最新的头像与昵称
+                  this.setData({
+                      nickName:queryRes.data[0].nickName,
+                      avatar: queryRes.data[0].avatarUrl,
+                      isLogin: true // 已经登录
+                  });
+                }else{
+                  // 若第一次登录则执行注册，新增到云数据库
+                  this.regist(res.userInfo);
+                }
+              })
+          })
       },
     })
   },
@@ -103,14 +92,14 @@ Page({
       cloudPath: cloudPath,
       success: res => {
         console.log(res);
-        let fileId = res.fileId;
+        let fileID = res.fileID;
         // 然后将访问连接存入users云数据库集合中
         let openid = getApp().globalData.openid;
         let db = wx.cloud.database();
 
         db.collection('users')
           .where({_openid: openid})
-          .update({data:{avatatUrl: fileID}})
+          .update({data:{avatarUrl: fileID}})
           .then(updateRes => {
             console.log(updateRes);
           })
